@@ -113,10 +113,10 @@ for line in lines:
       reps = json.loads(response.read().decode())
     except Exception as e:
       efatal('failure reading and/or decoding ' + value, e)
-    replicalist = []
     for typ in ['replicas', 'repositories']:
       for rep in reps[typ]:
-        replicalist.append(rep['name'])
+        if rep['name'] not in replicalist:
+          replicalist.append(rep['name'])
   elif key == 'source':
     source = value
   elif key == 'keypath':
